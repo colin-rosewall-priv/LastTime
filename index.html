@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Last Time App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
+  <link href="./DataTables/datatables.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./index.css">
+<script>navigator.serviceWorker.register("service-worker.js")</script> 
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+</head>
+
+<body>
+  <h2 class="heading">This is the last time app</h2>
+
+  <div class="flexible">
+    <div id="addformcontainer">
+      <form id="addform">
+        <div class="field">
+          <div>
+            <label for="addform_description">Description
+              <span class="required"></span>
+            </label>
+          </div>
+          <input type="text" id="addform_description" class="lowercase" list="description_list" required />
+          <datalist id="description_list">
+          </datalist>
+          <button type="button" class="buttonstyle" id="addform_clearselection">clear</button>
+        </div>
+
+        <div class="field">
+          <div>
+            <label for="addform_occurrencedate">
+              When did this occur?
+              <span class="required"></span>
+            </label>
+          </div>
+          <input type="date" id="addform_occurrencedate" value="" required="true" />
+        </div>
+
+        <div class="buttons">
+          <button type="submit" class="buttonstyle" id="submitform">Save</button>
+          <button type="button" class="buttonstyle" id="resetform">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="dashboard">
+      <table id="summary" class="display" style="width:100%" >
+
+      </table>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"> </script>
+  <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"> </script> -->
+  <script src="./DataTables/datatables.min.js"></script>
+  <!-- <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"> </script> -->
+  <script src="./index.js"> </script>
+</body>
+
+</html>

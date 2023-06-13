@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.heading {
+    text-align: center;
+}
+
+.flexible {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#addformcontainer {
+    display: flex;
+    flex: 0 1 max-content;
+    margin: 15px;
+    background-color: rgb(249, 240, 226);
+    border: 1px solid;
+}
+
+.dashboard {
+    display: flex;
+    flex: 3 1 max-content;
+    margin: 15px;
+    width: 700px;
+}
+
+form label {
+    color: dodgerblue;
+    font-weight: bold;
+}
+
+label > span.required::after {
+    content: "*";
+    color: red;
+}
+
+.field {
+    padding: 10px 20px;
+}
+
+.buttonstyle {
+    border-width: 1px;
+    padding: 2px 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.buttons > * {
+    margin: 15px 10px;
+}

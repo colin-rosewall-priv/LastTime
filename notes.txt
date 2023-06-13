@@ -1,0 +1,48 @@
+we would like a phone web app that lets me know the last time something happened.
+data will be stored on the device.
+
+data
+
+list of unique events for the events dropdown
+event		string
+
+list of event occurrences
+id		number (auto increment)
+description	string
+occurred	date
+
+compound index
+description+occurred
+
+examples
+replaced shaver			03/04/2023
+washed sheets			07/04/2023
+replaced water jug filter	13/04/2023
+pay council rates		10/02/2023
+pay electricity			13/04/2023
+pay colins car insurance	26/08/2022
+replaced toothbrush
+reconciled food
+pay house insurance
+logon to internet banking
+logon to superannuation
+
+
+the app's main screen will display a form to add a new entry and a list of entries described below.
+we need to display how many days since the most recent occurrence of each unique item, within the past 2 years. results will be ordered by largest to smallest.
+need to allow the user to filter the list.
+the description field will be unique.
+the description field will be a textbox and a dropdown list of unique descriptions available for the user to choose.
+the combination of description and occurred will be unique.
+
+adding a new entry
+description will default to empty string
+date will default to todays date
+
+validation
+description cannot be empty string or whitespace.
+description and occurred are mandatory.
+the combination of description and occurred will be unique.
+the description field will be unique. 
+
+
