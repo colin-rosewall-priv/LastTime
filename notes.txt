@@ -46,3 +46,6 @@ the combination of description and occurred will be unique.
 the description field will be unique. 
 
 
+deleting an entry
+include a delete button on each row
+when the delete button is clicked, ask if the user wants to delete, if yes then delete from the db and re-populate.

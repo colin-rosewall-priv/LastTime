@@ -17,6 +17,8 @@
         - Badges: https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/advanced-capabilities/07?id=application-badges
     */
 
+    const version = '1.1.0';
+        
     const HOSTNAME_WHITELIST = [
         self.location.hostname,
         'fonts.gstatic.com',

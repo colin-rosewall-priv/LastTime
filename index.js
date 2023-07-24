@@ -28,13 +28,24 @@ function dayNumberFormatted(day) {
     return (day < 10 ? `0${day}` : `${day}`);
 }
 
+function formatDateYYYYMMDD(theDate) {
+    let year = theDate.getFullYear();
+    let month = monthNumberFormatted(theDate.getMonth() + 1);
+    let day = dayNumberFormatted(theDate.getDate());
+
+    let formattedDate = `${year}-${month}-${day}`;
+    // console.log(formattedDate);
+
+    return(formattedDate);
+}
+
 function setupFirstScreen() {
     let today = new Date();
     let year = today.getFullYear();
     let month = monthNumberFormatted(today.getMonth() + 1);
     let day = dayNumberFormatted(today.getDate());
 
-    let todayFormatted = `${year}-${month}-${day}`;
+    let todayFormatted = formatDateYYYYMMDD(today);
     // console.log(`todayFormatted = ${todayFormatted}`);
 
     document.getElementById("addform_description").value = "";
@@ -78,13 +89,21 @@ function populateDescriptionList() {
 
 function populateOccurrences() {
     console.log("populateOccurrences");
+    let today = formatDateYYYYMMDD(new Date());
+
+    let twoYearsAgo = new Date();
+    twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+    twoYearsAgo = formatDateYYYYMMDD(twoYearsAgo);
+
+    //console.log('twoYearsAgo = ' + twoYearsAgo);
+
     const objects = new Object();
     let propertyAdded = false;
 
     db.transaction('r', db.eventOccurrences, function() {
         return db.eventOccurrences.where('[description+occurred]').between(
-            [Dexie.minKey, "2021-12-01"],
-            [Dexie.maxKey, "2023-06-30"]
+            [Dexie.minKey, twoYearsAgo],
+            [Dexie.maxKey, today]
         ).toArray();
     }).then((events) => {
         events.forEach(item => {
@@ -122,17 +141,42 @@ function populateOccurrences() {
     });
 }
 
+function deleteOccurrences(theDescription) {
+    var response = confirm(`Are you sure you want to delete ${theDescription}?`);
+    if (response) {
+        db.transaction('rw', db.eventOccurrences, async function() {
+            var results = await db.eventOccurrences.where({description: theDescription}).delete();
+            populateOccurrences();
+        })
+        .catch(function (err) {
+            console.error(err.stack || err);
+        });
+    }
+}
+
 $(document).ready(function () {
     setupFirstScreen();
 
-    $('#summary').DataTable({
+     var tb = $('#summary').DataTable({
         responsive: true,
         data: dataSet,
         columns: [
             { title: 'Event' },
             { title: 'Last Time' },
             { title: 'Days' },
+            { defaultContent: '<button>delete</button>' },
         ],
+    });
+
+    tb.on('click', 'button', function (e) {
+        var rowData = tb.row(e.target.closest('tr')).data();
+
+        if (Array.isArray(rowData)) {
+            var eventDescription = rowData[0];
+            if (typeof eventDescription === 'string') {
+                deleteOccurrences(eventDescription);
+            }
+        };
     });
 });
 
