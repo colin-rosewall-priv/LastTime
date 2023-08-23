@@ -142,10 +142,10 @@ function populateOccurrences() {
 }
 
 function deleteOccurrences(theDescription) {
-    var response = confirm(`Are you sure you want to delete ${theDescription}?`);
+    let response = confirm(`Are you sure you want to delete ${theDescription}?`);
     if (response) {
         db.transaction('rw', db.eventOccurrences, async function() {
-            var results = await db.eventOccurrences.where({description: theDescription}).delete();
+            let results = await db.eventOccurrences.where({description: theDescription}).delete();
             populateOccurrences();
         })
         .catch(function (err) {
@@ -157,22 +157,30 @@ function deleteOccurrences(theDescription) {
 $(document).ready(function () {
     setupFirstScreen();
 
-     var tb = $('#summary').DataTable({
+     let tb = $('#summary').DataTable({
         responsive: true,
         data: dataSet,
         columns: [
             { title: 'Event' },
             { title: 'Last Time' },
             { title: 'Days' },
-            { defaultContent: '<button>delete</button>' },
+            { defaultContent: '<img src="./img/bin1.svg" width="20px">' },
         ],
     });
 
-    tb.on('click', 'button', function (e) {
-        var rowData = tb.row(e.target.closest('tr')).data();
+    tb.on('click', 'img', function (e) {
+        let elem = e.target.closest('tr');
+        
+        if (elem.classList.contains('child')) {
+            elem = elem.previousElementSibling;
+        }
+        let rowData = tb.row(elem).data();
 
-        if (Array.isArray(rowData)) {
-            var eventDescription = rowData[0];
+        if (rowData === 'undefined') {
+            // do nothing
+        }
+        else if (Array.isArray(rowData)) {
+            let eventDescription = rowData[0];
             if (typeof eventDescription === 'string') {
                 deleteOccurrences(eventDescription);
             }

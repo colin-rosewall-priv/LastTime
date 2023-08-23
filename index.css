@@ -6,6 +6,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10pt;
 }
 
 .lowercase {
@@ -53,15 +54,15 @@ label > span.required::after {
 
 .buttonstyle {
     border-width: 1px;
-    padding: 2px 5px;
+    padding: 2px 10px;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .buttons > * {
-    margin: 15px 10px;
+    margin: 15px 15px;
 }
